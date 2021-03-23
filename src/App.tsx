@@ -12,7 +12,7 @@ function App() {
       <Container maxWidth="sm">
         <Box component="div" style={{ height: '100vh' }}>
           <Box>
-            <Typography variant="h3" gutterBottom>
+            <Typography variant="h4" gutterBottom>
               Newport Whales
             </Typography>
           </Box>

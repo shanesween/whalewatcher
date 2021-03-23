@@ -15,6 +15,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { colors } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,11 +25,21 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     cardHeader: {
       padding: theme.spacing(1),
-      textAlign: 'left'
+      textAlign: 'left',
+      '& .MuiCardHeader-content': {
+        '& .MuiTypography-overline': {
+          color: theme.palette.text.secondary
+        },
+        '& .MuiTypography-h5': {
+          fontWeight: 600,
+          color: theme.palette.text.primary
+        }
+      }
     },
     media: {
       height: 0,
       paddingTop: '56.25%', // 16:9
+      borderRadius: 12
     },
     expand: {
       transform: 'rotate(0deg)',
