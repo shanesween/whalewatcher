@@ -3,6 +3,8 @@ import './App.css';
 import { Box, Container, Typography } from '@material-ui/core';
 import theme from './theme';
 import OutlinedCard from './Card';
+import ContainedButtons from './Button';
+import ScrollableTabsButtonAuto from './TabContainer';
 
 function App() {
   return (
@@ -16,6 +18,12 @@ function App() {
           </Box>
           <Box>
             <OutlinedCard />
+          </Box>
+          <Box>
+            <ContainedButtons />
+          </Box>
+          <Box>
+            <ScrollableTabsButtonAuto />
           </Box>
         </Box>
       </Container>

@@ -17,62 +17,61 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        root: {
-            maxWidth: 345,
-        },
-        cardHeader: {
-            fontWeight: 300
-        },
-        cardSubHeader: {
-            fontWeight: 600,
-        },
-        media: {
-            height: 0,
-            paddingTop: '56.25%', // 16:9
-        },
-        expand: {
-            transform: 'rotate(0deg)',
-            marginLeft: 'auto',
-            transition: theme.transitions.create('transform', {
-                duration: theme.transitions.duration.shortest,
-            }),
-        },
-        expandOpen: {
-            transform: 'rotate(180deg)',
-        },
-        avatar: {
-            backgroundColor: red[500],
-        },
-    }),
+  createStyles({
+    root: {
+      maxWidth: 345,
+      backgroundColor: 'inherit'
+    },
+    cardHeader: {
+      padding: theme.spacing(1),
+      textAlign: 'left'
+    },
+    media: {
+      height: 0,
+      paddingTop: '56.25%', // 16:9
+    },
+    expand: {
+      transform: 'rotate(0deg)',
+      marginLeft: 'auto',
+      transition: theme.transitions.create('transform', {
+        duration: theme.transitions.duration.shortest,
+      }),
+    },
+    expandOpen: {
+      transform: 'rotate(180deg)',
+    },
+    avatar: {
+      backgroundColor: red[500],
+    },
+  }),
 );
 
 export default function RecipeReviewCard() {
-    const classes = useStyles();
-    const [expanded, setExpanded] = React.useState(false);
+  const classes = useStyles();
+  const [expanded, setExpanded] = React.useState(false);
 
-    const handleExpandClick = () => {
-        setExpanded(!expanded);
-    };
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
 
-    return (
-        <Card className={classes.root}>
-            <CardHeader
-                title="currently migrating"
-                titleTypographyProps={{ variant: "overline" }}
-                subheader="Gray Whales"
-                subheaderTypographyProps={{ variant: "h5", display: "block" }}
-            />
-            <CardMedia
-                className={classes.media}
-                image="/gray-whale.jpeg"
-                title="Paella dish"
-            />
-            <CardContent>
-
-            </CardContent>
-            <CardActions disableSpacing>
-            </CardActions>
-        </Card>
-    );
+  return (
+    <Card elevation={0} className={classes.root}>
+      <CardHeader
+        className={classes.cardHeader}
+        title="currently migrating"
+        titleTypographyProps={{ variant: "overline" }}
+        subheader="Gray Whales"
+        subheaderTypographyProps={{ variant: "h5", display: "block" }}
+      />
+      <CardMedia
+        className={classes.media}
+        image="/gray-whale.jpeg"
+        title="Paella dish"
+      />
+      {/* <CardContent>
+      </CardContent>
+      <CardActions disableSpacing>
+      </CardActions> */}
+    </Card>
+  );
 }
