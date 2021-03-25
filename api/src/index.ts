@@ -13,8 +13,10 @@ AxiosInstance.get(url)
       const $ = cheerio.load(html, { xmlMode: true, normalizeWhitespace: true, decodeEntities: true })
       const tableArray = $('h1:contains("Recent Counts") ~ table').html().split('</tr>')
 
-      console.log(tableArray);
-      console.log(typeof tableArray);
+      tableArray.forEach((elem, i) => {
+        const rowArray: string[] = elem.split('</td> <td>')
+        console.log(rowArray);
+      })
 
     }
   ).catch(console.error)
