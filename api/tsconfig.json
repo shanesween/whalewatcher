@@ -4,12 +4,14 @@
     "module": "commonjs",
     "outDir": "dist",
     "sourceMap": true,
+    "rootDir": "./",
     "resolveJsonModule": true,
     "lib": [
       "es6",
       "dom"
     ],
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "strict": true
   },
   "include": [
     "src/**/*.ts"
