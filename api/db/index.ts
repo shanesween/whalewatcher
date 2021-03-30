@@ -2,18 +2,19 @@
 import AWS from 'aws-sdk';
 
 AWS.config.update({ region: "us-east-1" });
+console.log(AWS.Credentials);
 
 export const dynamodb = new AWS.DynamoDB()
 
 var params = {
-  TableName: "WhaleSightings",
+  TableName: "Sightings",
   KeySchema: [
     { AttributeName: "date", KeyType: "HASH" },  //Partition key
-    { AttributeName: "dailyTotalCount", KeyType: "RANGE" }  //Sort key
+    { AttributeName: "count", KeyType: "RANGE" }  //Sort key
   ],
   AttributeDefinitions: [
     { AttributeName: "date", AttributeType: "S" },
-    { AttributeName: "dailyTotalCount", AttributeType: "N" }
+    { AttributeName: "count", AttributeType: "N" }
   ],
   ProvisionedThroughput: {
     ReadCapacityUnits: 10,

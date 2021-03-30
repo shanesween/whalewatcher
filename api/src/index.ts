@@ -15,8 +15,13 @@ export const getData = async () => {
 
     //normalize whitespace gave me most probles, simple fix! read. the. docs.
     const $ = cheerio.load(html, { xmlMode: true, normalizeWhitespace: true, decodeEntities: true })
+    console.log($);
 
-    const tableArray: string[] = $('h1:contains("Recent Counts") ~ table')?.html()?.split('</tr>') ?? []
+    let tableArray: string[] = $('h1:contains("Recent Counts") ~ table')?.html()?.split('</tr>') ?? []
+    if (url.includes('2015')) {
+      tableArray = $('h1:contains("2015 Counts") ~ table')?.html()?.split('</tr>') ?? []
+    }
+
     let responseDataArray: DailyData[] = []
 
     tableArray && tableArray.forEach((row, i) => {
@@ -33,17 +38,22 @@ export const getData = async () => {
 
         mammalArray.forEach((mammal, i) => {
           //daily count for each species, add to dailyTotal
-          const countSpecies = parseFloat(mammal.match(/[a-z]+|[^a-z]+/gi)![0].replace(/,/g, ''))
+          console.log();
+          const mammalDigitsOnly: RegExpMatchArray = mammal.match(/[a-z]+|[^a-z]+/gi) ?? []
+          const countSpecies = parseFloat(mammalDigitsOnly![0]?.replace(/,/g, ''))
 
           dailyTotalCount += countSpecies
 
           //species name
-          const species = mammal.replace(/^[, ]+|[, ]+$|[, ]+/g, " ").match(/\D/g)!.join('').trim()
+          if (mammal.length > 2) {
 
-          //mammalObject
-          const mammalObject: Mammal = { name: species, count: isNaN(countSpecies) ? 0 : countSpecies }
+            const species = mammal.replace(/^[, ]+|[, ]+$|[, ]+/g, " ")?.match(/\D/g)!.join('').trim()
 
-          dailyData.mammals = [...dailyData.mammals, mammalObject]
+            //mammalObject
+            const mammalObject: Mammal = { name: species, count: isNaN(countSpecies) ? 0 : countSpecies }
+
+            dailyData.mammals = [...dailyData.mammals, mammalObject]
+          }
         })
 
         dailyTotalCount = isNaN(dailyTotalCount) ? 0 : dailyTotalCount
