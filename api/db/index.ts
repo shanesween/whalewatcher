@@ -2,18 +2,26 @@
 import AWS from 'aws-sdk';
 
 AWS.config.update({ region: "us-east-1" });
+AWS.config.getCredentials(function(err) {
+  if (err) console.log(err.stack);
+  // credentials not loaded
+  else {
+    console.log("Access key:", AWS.config.credentials?.accessKeyId);
+  }
+});
 
 export const dynamodb = new AWS.DynamoDB()
+export const docClient = new AWS.DynamoDB.DocumentClient()
 
 var params = {
-  TableName: "WhaleSightings",
+  TableName: "Sightings",
   KeySchema: [
     { AttributeName: "date", KeyType: "HASH" },  //Partition key
-    { AttributeName: "dailyTotalCount", KeyType: "RANGE" }  //Sort key
+    { AttributeName: "count", KeyType: "RANGE" }  //Sort key
   ],
   AttributeDefinitions: [
-    { AttributeName: "date", AttributeType: "S" },
-    { AttributeName: "dailyTotalCount", AttributeType: "N" }
+    { AttributeName: "date", AttributeType: "N" },
+    { AttributeName: "count", AttributeType: "N" }
   ],
   ProvisionedThroughput: {
     ReadCapacityUnits: 10,

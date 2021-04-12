@@ -1,10 +1,6 @@
 import AWS from 'aws-sdk';
-import { dynamodb } from '.';
+import { docClient } from '.';
 import getData from '../src/index'
-
-AWS.config.update({ region: "us-east-1" });
-
-const docClient = new AWS.DynamoDB.DocumentClient()
 
 export const loadData = async () => {
   console.log("getData through loadData")
@@ -24,7 +20,7 @@ export const loadData = async () => {
       }
     }
 
-    docClient.put(params, function (err, data) {
+    day.date && docClient.put(params, function (err, data) {
       if (err) {
         console.error("Unable to add day", day.date, ". Error JSON:", JSON.stringify(err, null, 2))
       } else {
@@ -34,3 +30,5 @@ export const loadData = async () => {
     })
   })
 }
+
+export default loadData

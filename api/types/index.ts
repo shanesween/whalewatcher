@@ -29,7 +29,7 @@ export interface Mammal {
 }
 
 export interface DailyData {
-  date: string,
+  date: number,
   dailyTotalCount: number
   mammals: Mammal[]
 }
