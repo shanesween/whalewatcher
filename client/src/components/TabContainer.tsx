@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, withStyles, Theme, createStyles, Tabs, Tab, Typography, Box } from '@material-ui/core';
-import theme from './theme';
+import theme from '../theme';
 import BasicTable from './BasicTable';
 
 interface StyledTabsProps {
