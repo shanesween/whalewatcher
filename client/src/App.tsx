@@ -2,11 +2,29 @@ import React from 'react';
 import './App.css';
 import { Box, Container, Typography } from '@material-ui/core';
 import theme from './theme';
-import OutlinedCard from './Card';
-import ContainedButtons from './Button';
-import ScrollableTabsButtonAuto from './TabContainer';
+import OutlinedCard from './components/Card';
+import ContainedButtons from './components/Button';
+import ScrollableTabsButtonAuto from './components/TabContainer';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchSightings } from './store/actionCreators';
 
-function App() {
+const App = () => {
+
+
+  const sightings: ISighting[] = useSelector((state: SightingState) => state.sightings)
+  const dispatch = useDispatch()
+
+  React.useEffect(() => {
+    dispatch(fetchSightings())
+  }, [])
+
+  console.log("We really out here in a component?", sightings);
+
+
+
+
+
+
   return (
     <div className="App">
       <Container maxWidth="sm">
