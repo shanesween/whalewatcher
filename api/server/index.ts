@@ -1,4 +1,5 @@
 import express from 'express';
+import loadData from '../db/loadData';
 
 // rest of the code remains same
 const createApp = () => {
@@ -13,7 +14,7 @@ const createApp = () => {
 }
 
 const bootApp = async () => {
-  // await loadData()
+  await loadData()
   await createApp()
   // await startServer()
 }
