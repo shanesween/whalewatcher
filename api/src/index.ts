@@ -61,7 +61,7 @@ export const getData = async () => {
         dailyData.date && responseDataArray.push(dailyData)
       }
     })
-    
+
     return responseDataArray
 
   } catch (err) {

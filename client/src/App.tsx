@@ -10,6 +10,7 @@ import { fetchSightings } from './store/actionCreators';
 
 const App = () => {
 
+  const loading: boolean = useSelector((state: SightingState) => state.loading)
 
   const sightings: ISighting[] = useSelector((state: SightingState) => state.sightings)
   const dispatch = useDispatch()
@@ -18,11 +19,37 @@ const App = () => {
     dispatch(fetchSightings())
   }, [])
 
-  console.log("We really out here in a component?", sightings);
+  // console.log("We really out here in a component?", sightings);
+
+  // console.log(loading);
 
 
 
+  const getYesterdaySightings = (sightings: ISighting[]) => {
+    const today: Date = new Date()
+    const yesterday: Date = new Date()
 
+    yesterday.setDate(today.getDate() - 1)
+    yesterday.setHours(0, 0, 0, 0)
+
+
+    const yesterdayEpoch = yesterday.getTime()
+
+    const winner = sightings.find(s => {
+
+      return s.date === yesterdayEpoch
+    })
+    console.log(yesterdayEpoch);
+    console.log(yesterday);
+    console.log(winner);
+
+
+    // const yesterdaySightings: ISighting = []
+  }
+
+
+  getYesterdaySightings(sightings)
+  console.log(sightings);
 
 
   return (
