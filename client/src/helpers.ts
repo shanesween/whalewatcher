@@ -23,7 +23,7 @@ export const getYesterdaySightings = (sightings: ISighting[]) => {
     console.log(yesterday);
     console.log(winner);
 
-
+    return winner
     // const yesterdaySightings: ISighting = []
 }
 

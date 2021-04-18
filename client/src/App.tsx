@@ -11,17 +11,14 @@ import { getYesterdaySightings } from './helpers';
 
 const App = () => {
 
-  const loading: boolean = useSelector((state: SightingState) => state.loading)
 
-  const sightings: ISighting[] = useSelector((state: SightingState) => state.sightings)
   const dispatch = useDispatch()
 
   React.useEffect(() => {
     dispatch(fetchSightings())
   }, [])
 
-  getYesterdaySightings(sightings)
-  console.log(sightings);
+
 
 
   return (

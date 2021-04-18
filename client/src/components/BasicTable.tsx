@@ -26,22 +26,29 @@ const rows = [
   createData('Humpback Whale', 356, '#1C3322')
 ];
 
-export default function BasicTable() {
+interface Props {
+  data: ISighting
+}
+
+export default function BasicTable(props: Props) {
   const classes = useStyles();
+  console.log(props);
+
+  const { data } = props
 
   return (
     <TableContainer>
       <Table className={classes.table} aria-label="simple table">
         <TableBody>
-          {rows.map((row) => (
+          {data && data.mammals.map((row: Mammal) => (
             <TableRow key={row.name}>
               <TableCell>
-                <FiberManualRecordIcon style={{ color: `${row.color}` }} />
+                <FiberManualRecordIcon />
               </TableCell>
               <TableCell component="th" scope="row">
                 {row.name}
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
+              <TableCell align="right">{row.count}</TableCell>
             </TableRow>
           ))}
         </TableBody>

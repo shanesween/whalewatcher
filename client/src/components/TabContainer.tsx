@@ -2,6 +2,9 @@ import React from 'react';
 import { makeStyles, withStyles, Theme, createStyles, Tabs, Tab, Typography, Box } from '@material-ui/core';
 import theme from '../theme';
 import BasicTable from './BasicTable';
+import { useSelector } from 'react-redux';
+import { getYesterdaySightings } from '../helpers';
+import Skeleton from '@material-ui/lab/Skeleton';
 
 interface StyledTabsProps {
   value: number;
@@ -57,21 +60,33 @@ interface TabPanelProps {
 function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
 
+  const loading: boolean = useSelector((state: SightingState) => state.loading)
+
+  const sightings: ISighting[] = useSelector((state: SightingState) => state.sightings)
+
+  const yesterdayData = getYesterdaySightings(sightings)
+  console.log(yesterdayData);
+
   return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box p={1}>
-          {/* <Typography>{children}</Typography> */}
-          <BasicTable />
-        </Box>
-      )}
-    </div>
+    yesterdayData ?
+      (
+        <div
+          role="tabpanel"
+          hidden={value !== index}
+          id={`simple-tabpanel-${index}`}
+          aria-labelledby={`simple-tab-${index}`}
+          {...other}
+        >
+          {value === index && (
+            <Box p={1}>
+              <BasicTable data={yesterdayData} />
+            </Box>
+          )}
+        </div>
+      ) :
+      (
+        <Skeleton animation="wave" />
+      )
   );
 }
 
@@ -89,6 +104,7 @@ export default function CustomizedTabs() {
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
   };
+
 
   return (
     <div className={classes.root}>
