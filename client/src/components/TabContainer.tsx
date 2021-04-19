@@ -65,16 +65,14 @@ function TabPanel(props: TabPanelProps) {
   const sightings: ISighting[] = useSelector((state: SightingState) => state.sightings)
 
   const yesterdayData = getYesterdaySightings(sightings)
-  // console.log(yesterdayData);
-  // console.log("index here now", value);
 
   const weekData = getWeekSightings(sightings)
-  // console.log(weekData);
 
   const monthData = getMonthSightings(sightings)
 
 
   let data: Record<string, number> = {}
+
   const setData = () => {
     switch (value) {
       case 0:
