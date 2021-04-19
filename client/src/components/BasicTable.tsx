@@ -27,12 +27,11 @@ const rows = [
 ];
 
 interface Props {
-  data: ISighting
+  data: Record<string, number>
 }
 
 export default function BasicTable(props: Props) {
   const classes = useStyles();
-  console.log(props);
 
   const { data } = props
 
@@ -40,15 +39,15 @@ export default function BasicTable(props: Props) {
     <TableContainer>
       <Table className={classes.table} aria-label="simple table">
         <TableBody>
-          {data && data.mammals.map((row: Mammal) => (
-            <TableRow key={row.name}>
+          {data && Object.keys(data).map((name) => (
+            <TableRow key={name}>
               <TableCell>
                 <FiberManualRecordIcon />
               </TableCell>
               <TableCell component="th" scope="row">
-                {row.name}
+                {name}
               </TableCell>
-              <TableCell align="right">{row.count}</TableCell>
+              <TableCell align="right">{data[name]}</TableCell>
             </TableRow>
           ))}
         </TableBody>

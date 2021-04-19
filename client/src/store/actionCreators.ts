@@ -20,7 +20,6 @@ const getYesterday = (sightings: ISighting[]) => {
 export const fetchSightings = () => async (dispatch: Dispatch) => {
     try {
         const res = await axios.get('http://localhost:8000/api/sightings/')
-        console.log("Ah shit were in this bitch", res);
 
         dispatch(getSightings(res.data))
     } catch (err) {

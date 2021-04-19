@@ -3,7 +3,7 @@ import { makeStyles, withStyles, Theme, createStyles, Tabs, Tab, Typography, Box
 import theme from '../theme';
 import BasicTable from './BasicTable';
 import { useSelector } from 'react-redux';
-import { getYesterdaySightings } from '../helpers';
+import { getMonthSightings, getWeekSightings, getYesterdaySightings } from '../helpers';
 import Skeleton from '@material-ui/lab/Skeleton';
 
 interface StyledTabsProps {
@@ -65,10 +65,42 @@ function TabPanel(props: TabPanelProps) {
   const sightings: ISighting[] = useSelector((state: SightingState) => state.sightings)
 
   const yesterdayData = getYesterdaySightings(sightings)
-  console.log(yesterdayData);
+  // console.log(yesterdayData);
+  // console.log("index here now", value);
+
+  const weekData = getWeekSightings(sightings)
+  // console.log(weekData);
+
+  const monthData = getMonthSightings(sightings)
+
+
+  let data: Record<string, number> = {}
+  const setData = () => {
+    switch (value) {
+      case 0:
+        data = yesterdayData
+        console.log("number 0");
+
+        break;
+      case 1:
+        data = weekData
+        console.log("number 1");
+
+        break;
+      case 2:
+        data = monthData
+        console.log("number 22222");
+        break
+      default:
+        console.log("Default motherfucker");
+        break
+    }
+  }
+
+  setData()
 
   return (
-    yesterdayData ?
+    data ?
       (
         <div
           role="tabpanel"
@@ -79,7 +111,7 @@ function TabPanel(props: TabPanelProps) {
         >
           {value === index && (
             <Box p={1}>
-              <BasicTable data={yesterdayData} />
+              <BasicTable data={data} />
             </Box>
           )}
         </div>
