@@ -18,14 +18,6 @@ function createData(name: string, calories: number, color: string) {
   return { name, calories, color };
 }
 
-const rows = [
-  createData('Gray Whale', 159, '#535353'),
-  createData('Common Dolphin', 237, '#90949C'),
-  createData('Pacific White Sided Dolphin', 262, '#1C3322'),
-  createData('Fin Whale', 305, '#1C3322'),
-  createData('Humpback Whale', 356, '#1C3322')
-];
-
 interface Props {
   data: Record<string, number>
 }
@@ -35,6 +27,9 @@ export default function BasicTable(props: Props) {
 
   const { data } = props
 
+  const colors = ['#535353', '#90949C', '#1C3322', '#98B9DF', '#335D9F'];
+  const getColor = () => colors[Math.floor(Math.random() * colors.length)];
+
   return (
     <TableContainer>
       <Table className={classes.table} aria-label="simple table">
@@ -42,7 +37,7 @@ export default function BasicTable(props: Props) {
           {data && Object.keys(data).map((name) => (
             <TableRow key={name}>
               <TableCell>
-                <FiberManualRecordIcon />
+                <FiberManualRecordIcon style={{ color: getColor() }} />
               </TableCell>
               <TableCell component="th" scope="row">
                 {name}
