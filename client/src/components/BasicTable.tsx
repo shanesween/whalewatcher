@@ -14,10 +14,6 @@ const useStyles = makeStyles({
   },
 });
 
-function createData(name: string, calories: number, color: string) {
-  return { name, calories, color };
-}
-
 interface Props {
   data: Record<string, number>
 }

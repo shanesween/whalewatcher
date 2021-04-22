@@ -8,9 +8,13 @@ const useStyles = makeStyles((theme: Theme) =>
       '& > *': {
         margin: theme.spacing(1),
       },
+      padding: '16px'
+
     },
     button: {
       borderRadius: 20,
+      width: '75%'
+      // backgroundColor: theme.palette.primary.main
     }
   }),
 );
@@ -20,7 +24,7 @@ export default function ContainedButtons() {
 
   return (
     <div className={classes.root}>
-      <Button variant="contained" color="primary" href="#contained-buttons" className={classes.button}>
+      <Button variant="contained" color="primary" target="_blank" href="https://newportwhales.com/whalewatchingprices.html" className={classes.button}>
         Reserve a Trip
       </Button>
     </div>

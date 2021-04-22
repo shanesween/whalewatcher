@@ -5,6 +5,7 @@ import BasicTable from './BasicTable';
 import { useSelector } from 'react-redux';
 import { getMonthSightings, getWeekSightings, getYesterdaySightings } from '../helpers';
 import Skeleton from '@material-ui/lab/Skeleton';
+import Chart from './Chart';
 
 interface StyledTabsProps {
   value: number;
@@ -55,7 +56,6 @@ interface TabPanelProps {
   index: any;
   value: any;
 }
-
 
 function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
@@ -112,6 +112,9 @@ function TabPanel(props: TabPanelProps) {
               <BasicTable data={data} />
             </Box>
           )}
+          <Box>
+            <Chart data={data} />
+          </Box>
         </div>
       ) :
       (
@@ -127,7 +130,7 @@ function a11yProps(index: any) {
   };
 }
 
-export default function CustomizedTabs() {
+const TabContainer = () => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -157,3 +160,6 @@ export default function CustomizedTabs() {
     </div>
   );
 }
+
+
+export default TabContainer
