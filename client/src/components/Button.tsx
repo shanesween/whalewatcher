@@ -5,11 +5,7 @@ import Button from '@material-ui/core/Button';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      '& > *': {
-        margin: theme.spacing(1),
-      },
-      padding: '16px'
-
+      padding: '20px 0 40px 0'
     },
     button: {
       borderRadius: 20,
@@ -19,14 +15,16 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function ContainedButtons() {
+const ButtonContainer = () => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <Button variant="contained" color="primary" target="_blank" href="https://newportwhales.com/whalewatchingprices.html" className={classes.button}>
+      <Button variant="contained" color="primary" target="_blank" href="https://newportwhales.com/whalewatchingprices.html" className={classes.button} disableElevation>
         Reserve a Trip
       </Button>
     </div>
   );
 }
+
+export default ButtonContainer

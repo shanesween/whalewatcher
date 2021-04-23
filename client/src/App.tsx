@@ -9,7 +9,7 @@ const App = () => {
 
   React.useEffect(() => {
     dispatch(fetchSightings())
-  }, [])
+  }, [dispatch])
 
   // const sightings: ISighting[] = useSelector((state: SightingState) => state.sightings)
 

@@ -1,11 +1,9 @@
 import React from 'react';
-import { makeStyles, withStyles, Theme, createStyles, Tabs, Tab, Typography, Box } from '@material-ui/core';
+import { makeStyles, withStyles, Theme, createStyles, Tabs, Tab, Box } from '@material-ui/core';
 import theme from '../theme';
 import BasicTable from './BasicTable';
 import { useSelector } from 'react-redux';
 import { getMonthSightings, getWeekSightings, getYesterdaySightings } from '../helpers';
-import Skeleton from '@material-ui/lab/Skeleton';
-import Chart from './Chart';
 
 interface StyledTabsProps {
   value: number;
@@ -23,7 +21,7 @@ const StyledTabs = withStyles({
       backgroundColor: theme.palette.primary.main
     },
   },
-})((props: StyledTabsProps) => <Tabs {...props} TabIndicatorProps={{ children: <span /> }} />);
+})((props: StyledTabsProps) => <Tabs {...props} centered TabIndicatorProps={{ children: <span /> }} />);
 
 interface StyledTabProps {
   label: string;
@@ -32,10 +30,11 @@ interface StyledTabProps {
 const StyledTab = withStyles((theme: Theme) =>
   createStyles({
     root: {
-      textTransform: 'none',
-      fontWeight: theme.typography.fontWeightRegular,
-      fontSize: theme.typography.pxToRem(15),
-      marginRight: theme.spacing(1),
+      // textTransform: 'none',
+      // fontWeight: theme.typography.fontWeightRegular,
+      // fontSize: theme.typography.pxToRem(15),
+      // marginRight: theme.spacing(1),
+
       '&:focus': {
         opacity: 1,
       },
@@ -46,8 +45,8 @@ const StyledTab = withStyles((theme: Theme) =>
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     flexGrow: 1,
-  },
-  demo2: {
+    padding: '20px 0 0 0',
+
   },
 }));
 
@@ -57,12 +56,8 @@ interface TabPanelProps {
   value: any;
 }
 
-function TabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
-
-  const loading: boolean = useSelector((state: SightingState) => state.loading)
-
-  const sightings: ISighting[] = useSelector((state: SightingState) => state.sightings)
+const setData = (value: number, sightings: ISighting[]) => {
+  let data: Record<string, number> = {}
 
   const yesterdayData = getYesterdaySightings(sightings)
 
@@ -70,57 +65,44 @@ function TabPanel(props: TabPanelProps) {
 
   const monthData = getMonthSightings(sightings)
 
-
-  let data: Record<string, number> = {}
-
-  const setData = () => {
-    switch (value) {
-      case 0:
-        data = yesterdayData
-        console.log("number 0");
-
-        break;
-      case 1:
-        data = weekData
-        console.log("number 1");
-
-        break;
-      case 2:
-        data = monthData
-        console.log("number 22222");
-        break
-      default:
-        console.log("Default motherfucker");
-        break
-    }
+  switch (value) {
+    case 0:
+      data = yesterdayData
+      break;
+    case 1:
+      data = weekData
+      break;
+    case 2:
+      data = monthData
+      break
+    default:
+      break
   }
+  return data
+}
 
-  setData()
+function TabPanel(props: TabPanelProps) {
+  const { children, value, index, ...other } = props;
+  const sightings: ISighting[] = useSelector((state: SightingState) => state.sightings)
+
+  const data = setData(value, sightings)
 
   return (
-    data ?
-      (
-        <div
-          role="tabpanel"
-          hidden={value !== index}
-          id={`simple-tabpanel-${index}`}
-          aria-labelledby={`simple-tab-${index}`}
-          {...other}
-        >
-          {value === index && (
-            <Box p={1}>
-              <BasicTable data={data} />
-            </Box>
-          )}
-          <Box>
-            <Chart data={data} />
+    (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`simple-tabpanel-${index}`}
+        aria-labelledby={`simple-tab-${index}`}
+        {...other}
+      >
+        {value === index && (
+          <Box p={1}>
+            <BasicTable data={data} />
           </Box>
-        </div>
-      ) :
-      (
-        <Skeleton animation="wave" />
-      )
-  );
+        )}
+      </div>
+    ))
 }
 
 function a11yProps(index: any) {
@@ -141,22 +123,16 @@ const TabContainer = () => {
 
   return (
     <div className={classes.root}>
-      <div className={classes.demo2}>
+      <div>
         <StyledTabs value={value} onChange={handleChange} aria-label="styled tabs example">
           <StyledTab label="Yesterday" {...a11yProps(0)} />
           <StyledTab label="This Week" {...a11yProps(1)} />
           <StyledTab label="This Month" {...a11yProps(2)} />
         </StyledTabs>
       </div>
-      <TabPanel value={value} index={0}>
-        Item One
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Item Two
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
-      </TabPanel>
+      <TabPanel value={value} index={0} />
+      <TabPanel value={value} index={1} />
+      <TabPanel value={value} index={2} />
     </div>
   );
 }
