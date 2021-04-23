@@ -38,21 +38,26 @@ export const getData = async () => {
 
         mammalArray.forEach((mammal, i) => {
           //daily count for each species, add to dailyTotal
-          console.log();
-          const mammalDigitsOnly: RegExpMatchArray = mammal.match(/[a-z]+|[^a-z]+/gi) ?? []
-          const countSpecies = parseFloat(mammalDigitsOnly![0]?.replace(/,/g, ''))
+          if (mammal !== 'Bad Weather') {
+            const mammalDigitsOnly: RegExpMatchArray = mammal.match(/[a-z]+|[^a-z]+/gi) ?? []
+            const countSpecies = parseFloat(mammalDigitsOnly![0]?.replace(/,/g, ''))
 
-          dailyTotalCount += countSpecies
+            dailyTotalCount += countSpecies
+            console.log(mammal);
 
-          //species name
-          if (mammal.length > 2) {
+            //species name
+            // have to check for > 2 because some data is incorrectly inputted on site (missing space after a comma)
+            if (mammal.length > 2) {
+              console.log(mammal);
 
-            const species = mammal.replace(/^[, ]+|[, ]+$|[, ]+/g, " ")?.match(/\D/g)!.join('').trim()
+              let species = mammal.replace(/^[, ]+|[, ]+$|[, ]+/g, " ")?.match(/\D/g)!.join('').trim()
+              const modifiedSpecies = species.replace('&apos;', '\'')
 
-            //mammalObject
-            const mammalObject: Mammal = { name: species, count: isNaN(countSpecies) ? 0 : countSpecies }
+              //mammalObject
+              const mammalObject: Mammal = { name: modifiedSpecies, count: isNaN(countSpecies) ? 0 : countSpecies }
 
-            dailyData.mammals = [...dailyData.mammals, mammalObject]
+              dailyData.mammals = [...dailyData.mammals, mammalObject]
+            }
           }
         })
 
