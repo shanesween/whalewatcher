@@ -4,6 +4,7 @@ import theme from '../theme';
 import BasicTable from './BasicTable';
 import { useSelector } from 'react-redux';
 import { getMonthSightings, getWeekSightings, getYesterdaySightings } from '../helpers';
+import { Skeleton } from '@material-ui/lab';
 
 interface StyledTabsProps {
   value: number;
@@ -98,7 +99,19 @@ function TabPanel(props: TabPanelProps) {
       >
         {value === index && (
           <Box p={1}>
-            <BasicTable data={data} />
+            {
+              sightings.length ? (
+
+                <BasicTable data={data} />
+              ) : (
+                <>
+                  <Skeleton animation="wave" variant="text" />
+                  <Skeleton animation="wave" variant="text" />
+                  <Skeleton animation="wave" variant="text" />
+                  <Skeleton animation="wave" variant="text" />
+                </>
+              )
+            }
           </Box>
         )}
       </div>
@@ -123,13 +136,11 @@ const TabContainer = () => {
 
   return (
     <div className={classes.root}>
-      <div>
-        <StyledTabs value={value} onChange={handleChange} aria-label="styled tabs example">
-          <StyledTab label="Yesterday" {...a11yProps(0)} />
-          <StyledTab label="This Week" {...a11yProps(1)} />
-          <StyledTab label="This Month" {...a11yProps(2)} />
-        </StyledTabs>
-      </div>
+      <StyledTabs value={value} onChange={handleChange} aria-label="styled tabs example">
+        <StyledTab label="Yesterday" {...a11yProps(0)} />
+        <StyledTab label="This Week" {...a11yProps(1)} />
+        <StyledTab label="This Month" {...a11yProps(2)} />
+      </StyledTabs>
       <TabPanel value={value} index={0} />
       <TabPanel value={value} index={1} />
       <TabPanel value={value} index={2} />
