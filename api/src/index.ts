@@ -13,9 +13,8 @@ export const getData = async () => {
 
     const html = result.data;
 
-    //normalize whitespace gave me most probles, simple fix! read. the. docs.
+    //normalize whitespace gave me most problems, simple fix! read. the. docs.
     const $ = cheerio.load(html, { xmlMode: true, normalizeWhitespace: true, decodeEntities: true })
-    console.log($);
 
     let tableArray: string[] = $('h1:contains("Recent Counts") ~ table')?.html()?.split('</tr>') ?? []
     if (url.includes('2015')) {
@@ -43,12 +42,10 @@ export const getData = async () => {
             const countSpecies = parseFloat(mammalDigitsOnly![0]?.replace(/,/g, ''))
 
             dailyTotalCount += countSpecies
-            console.log(mammal);
 
             //species name
             // have to check for > 2 because some data is incorrectly inputted on site (missing space after a comma)
             if (mammal.length > 2) {
-              console.log(mammal);
 
               let species = mammal.replace(/^[, ]+|[, ]+$|[, ]+/g, " ")?.match(/\D/g)!.join('').trim()
               const modifiedSpecies = species.replace('&apos;', '\'')

@@ -2,19 +2,9 @@ import AWS from 'aws-sdk';
 import getData from '../src/index'
 
 export const loadData = async () => {
-  console.log("HELLO?");
-
   AWS.config.update({ region: "us-east-1" });
-
   const docClient = new AWS.DynamoDB.DocumentClient()
-
-
-  console.log("getData through loadData")
   const data = await getData()
-  console.log("Are we here after getData?");
-
-
-  console.log("data in the HOUSE", data);
 
   data?.forEach((day) => {
     const params = {
