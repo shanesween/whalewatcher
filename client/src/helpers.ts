@@ -18,7 +18,7 @@ export const getYesterdaySightings = (sightings: ISighting[]) => {
     })
     let yesterdayHashMap: Record<string, number> = {}
 
-    winner?.mammals.map((m: Mammal) => {
+    winner?.mammals.forEach((m: Mammal) => {
         if (!yesterdayHashMap[m.name]) {
             yesterdayHashMap[m.name] = m.count
         }
@@ -42,8 +42,8 @@ export const getWeekSightings = (sightings: ISighting[]) => {
     })
     let weekHashMap: Record<string, number> = {}
 
-    winner.map((s) => {
-        s.mammals.map((m: Mammal) => {
+    winner.forEach((s) => {
+        s.mammals.forEach((m: Mammal) => {
             if (!weekHashMap[m.name]) {
                 weekHashMap[m.name] = m.count
             }
@@ -67,8 +67,8 @@ export const getMonthSightings = (sightings: ISighting[]) => {
     })
     let monthHashMap: Record<string, number> = {}
 
-    winner.map((s) => {
-        s.mammals.map((m: Mammal) => {
+    winner.forEach((s) => {
+        s.mammals.forEach((m: Mammal) => {
             if (!monthHashMap[m.name]) {
                 monthHashMap[m.name] = m.count
             }
