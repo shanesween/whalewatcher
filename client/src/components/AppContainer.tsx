@@ -11,7 +11,6 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       height: '100vh'
     },
-
   }),
 );
 
@@ -23,13 +22,9 @@ const AppContainer = () => {
       <Header />
       <Container maxWidth="xs" style={{ paddingTop: 40 }}>
         <OutlinedCard />
-        <Box>
-          <ButtonContainer />
-        </Box>
+        <ButtonContainer />
         <Divider />
-        <Box>
-          <SightingsContainer />
-        </Box>
+        <SightingsContainer />
       </Container>
       <Footer />
     </Box>

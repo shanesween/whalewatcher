@@ -1,2 +1,1 @@
 export const GET_SIGHTINGS = "GET_SIGHTINGS"
-export const GET_YESTERDAY = "GET_YESTERDAY"

@@ -11,10 +11,6 @@ const App = () => {
     dispatch(fetchSightings())
   }, [dispatch])
 
-  // const sightings: ISighting[] = useSelector((state: SightingState) => state.sightings)
-
-  // console.log(sightings);
-
   return (
     <div className="App">
       <AppContainer />

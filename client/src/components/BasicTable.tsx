@@ -4,22 +4,17 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
-const useStyles = makeStyles({
-  table: {
-    // minWidth: 650,
-  },
-});
+const useStyles = makeStyles({});
 
 interface Props {
   data: Record<string, number>
 }
 
 export default function BasicTable(props: Props) {
-  const classes = useStyles();
+  // const classes = useStyles();
 
   const { data } = props
 
@@ -28,7 +23,7 @@ export default function BasicTable(props: Props) {
 
   return (
     <TableContainer>
-      <Table className={classes.table} aria-label="simple table">
+      <Table aria-label="simple table">
         <TableBody>
           {data && Object.keys(data).map((name) => (
             <TableRow key={name}>

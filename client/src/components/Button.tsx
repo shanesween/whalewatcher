@@ -10,7 +10,6 @@ const useStyles = makeStyles((theme: Theme) =>
     button: {
       borderRadius: 20,
       width: 300
-      // backgroundColor: theme.palette.primary.main
     }
   }),
 );

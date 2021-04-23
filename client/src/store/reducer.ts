@@ -1,4 +1,4 @@
-import { GET_SIGHTINGS, GET_YESTERDAY } from "./actionTypes"
+import { GET_SIGHTINGS } from "./actionTypes"
 
 const initialState: SightingState = {
     sightings: [],
@@ -8,12 +8,6 @@ const initialState: SightingState = {
 const reducer = (state: SightingState = initialState, action: SightingAction): SightingState => {
     switch (action.type) {
         case GET_SIGHTINGS:
-            return {
-                ...state,
-                sightings: action.sightings,
-                loading: false
-            }
-        case GET_YESTERDAY:
             return {
                 ...state,
                 sightings: action.sightings,

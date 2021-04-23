@@ -1,8 +1,5 @@
-import React from 'react'
-
 const helpers = () => {
-    console.log("AYY");
-
+    console.log('test');
 }
 
 export const getYesterdaySightings = (sightings: ISighting[]) => {
@@ -29,7 +26,6 @@ export const getYesterdaySightings = (sightings: ISighting[]) => {
     })
 
     return yesterdayHashMap
-    // const yesterdaySightings: ISighting = []
 }
 
 export const getWeekSightings = (sightings: ISighting[]) => {
@@ -44,7 +40,6 @@ export const getWeekSightings = (sightings: ISighting[]) => {
     const winner = sightings.filter((s) => {
         return s.date >= lastWeekEpoch
     })
-    // console.log(winner);
     let weekHashMap: Record<string, number> = {}
 
     winner.map((s) => {
@@ -55,8 +50,6 @@ export const getWeekSightings = (sightings: ISighting[]) => {
             weekHashMap[m.name] += m.count
         })
     })
-    // console.log(weekHashMap);
-
     return weekHashMap
 }
 
@@ -72,7 +65,6 @@ export const getMonthSightings = (sightings: ISighting[]) => {
     const winner = sightings.filter((s) => {
         return s.date >= lastMonthEpoch
     })
-    // console.log(winner);
     let monthHashMap: Record<string, number> = {}
 
     winner.map((s) => {
@@ -83,9 +75,34 @@ export const getMonthSightings = (sightings: ISighting[]) => {
             monthHashMap[m.name] += m.count
         })
     })
-    // console.log(monthHashMap);
 
     return monthHashMap
 }
+
+export const setData = (value: number, sightings: ISighting[]) => {
+    let data: Record<string, number> = {}
+
+    const yesterdayData = getYesterdaySightings(sightings)
+
+    const weekData = getWeekSightings(sightings)
+
+    const monthData = getMonthSightings(sightings)
+
+    switch (value) {
+        case 0:
+            data = yesterdayData
+            break;
+        case 1:
+            data = weekData
+            break;
+        case 2:
+            data = monthData
+            break
+        default:
+            break
+    }
+    return data
+}
+
 
 export default helpers
