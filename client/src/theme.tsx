@@ -9,6 +9,7 @@ const theme = createMuiTheme({
     },
     secondary: {
       main: '#172D49',
+      contrastText: '#fff'
     },
     error: {
       main: red.A400,
@@ -17,8 +18,8 @@ const theme = createMuiTheme({
       default: '#fff'
     },
     text: {
-      primary: '#999',
-      secondary: '#fff'
+      primary: '#000',
+      secondary: '#999'
     }
   },
 });

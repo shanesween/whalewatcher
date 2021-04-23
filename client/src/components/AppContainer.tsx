@@ -1,23 +1,17 @@
 import React from 'react';
-import { Box, Typography, Container, createStyles, makeStyles, Theme, Divider } from '@material-ui/core';
-import ContainedButtons from './Button';
+import { Box, Container, createStyles, makeStyles, Theme, Divider } from '@material-ui/core';
 import OutlinedCard from './Card';
-import ScrollableTabsButtonAuto from './TabContainer';
 import SightingsContainer from './SightingsContainer';
 import Footer from './Footer';
+import Header from './Header';
+import ButtonContainer from './Button';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       height: '100vh'
     },
-    headerContainer: {
-      height: 100,
-      backgroundColor: theme.palette.secondary.main,
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-    }
+
   }),
 );
 
@@ -26,15 +20,11 @@ const AppContainer = () => {
 
   return (
     <Box component="div" className={classes.root}>
-      <Box className={classes.headerContainer}>
-        <Typography variant="h4" color="textSecondary">
-          Newport Whales
-        </Typography>
-      </Box>
-      <Container maxWidth="xs">
+      <Header />
+      <Container maxWidth="xs" style={{ paddingTop: 40 }}>
         <OutlinedCard />
         <Box>
-          <ContainedButtons />
+          <ButtonContainer />
         </Box>
         <Divider />
         <Box>
