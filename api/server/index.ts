@@ -16,7 +16,6 @@ const createApp = () => {
 const bootApp = async () => {
   await loadData()
   await createApp()
-  // await startServer()
 }
 
 bootApp()
