@@ -17,10 +17,10 @@ export const loadData = async () => {
       const newDate = new Date(day.date)
       newDate.setHours(0, 0, 0, 0)
 
-      if (newDate.getTime() === yesterday.getTime()) {
-        console.log("we have current data");
-        break;
-      }
+      // if (newDate.getTime() === yesterday.getTime()) {
+      //   console.log("we have current data");
+      //   break;
+      // }
 
       const params = {
         TableName: "Sightings",
