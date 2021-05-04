@@ -4,8 +4,9 @@
   "repository": {
     "type": "git",
     "url": "ssh://git@github.com/shanesween/whalewatcher.git",
-    "directory": "packages/api"
+    "directory": "packages/src"
   },
+  "homepage": "https://shanesween.github.io.whalewatcher/",
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
