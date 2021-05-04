@@ -1,7 +1,11 @@
 {
   "name": "api",
   "version": "1.0.0",
-  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/shanesween/whalewatcher.git",
+    "directory": "packages/api"
+  },
   "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

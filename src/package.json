@@ -1,7 +1,11 @@
 {
   "name": "whalewatcher",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/shanesween/whalewatcher.git",
+    "directory": "packages/api"
+  },
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
