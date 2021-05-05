@@ -1,0 +1,1 @@
+export const GET_SIGHTINGS = 'GET_SIGHTINGS';

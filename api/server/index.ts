@@ -1,5 +1,6 @@
 import express from 'express';
 import loadData from '../db/loadData';
+import router from './routes';
 
 // rest of the code remains same
 const createApp = () => {
@@ -10,12 +11,12 @@ const createApp = () => {
     console.log(`⚡️[server]: Server is running at https://localhost:${PORT}`);
   });
 
-  app.use("/api", require("./routes"))
-}
+  app.use('/api', router);
+};
 
 const bootApp = async () => {
-  await loadData()
-  await createApp()
-}
+  await loadData();
+  createApp();
+};
 
-bootApp()
+bootApp();

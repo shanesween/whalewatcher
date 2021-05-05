@@ -22,9 +22,9 @@
     "noImplicitAny": true,
     "noImplicitThis": true,
     "strictNullChecks": true,
-    "rootDir": "./src"
+    "rootDir": "src1"
   },
   "include": [
-    "src"
+    "."
   ]
 }
