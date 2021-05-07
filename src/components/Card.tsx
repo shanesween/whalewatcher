@@ -2,39 +2,37 @@ import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { Box, SvgIcon } from '@material-ui/core';
-import Image from 'material-ui-image'
+import Image from 'material-ui-image';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    migrateTitleContainer: {
-      display: 'flex',
-      justifyContent: 'start',
-      padding: '0 12px'
-    },
-    icon: {
-      marginRight: 24
-    },
-    migrateInfoContainer: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      padding: '20px 12px 0 12px'
-    },
-    imageContainer: {
-      height: '50% !important',
-      width: '50% !important',
-      marginTop: 8
-    },
-    image: {
-      borderRadius: 8
-    },
-    textContainer: {
-      width: '50%',
-      margin: '0px 0px 0px 20px'
-    },
-  }),
-);
+const useStyles = makeStyles((theme: Theme) => createStyles({
+  migrateTitleContainer: {
+    display: 'flex',
+    justifyContent: 'start',
+    padding: '0 12px',
+  },
+  icon: {
+    marginRight: 24,
+  },
+  migrateInfoContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    padding: '20px 12px 0 12px',
+  },
+  imageContainer: {
+    height: '50% !important',
+    width: '50% !important',
+    marginTop: 8,
+  },
+  image: {
+    borderRadius: 8,
+  },
+  textContainer: {
+    width: '50%',
+    margin: '0px 0px 0px 20px',
+  },
+}));
 
-export default function RecipeReviewCard() {
+export const Card: () => JSX.Element = () => {
   const classes = useStyles();
 
   return (
@@ -57,11 +55,17 @@ export default function RecipeReviewCard() {
           <Typography variant="h6" align="left">
             Gray Whales
           </Typography>
-          <Typography align="justify" variant="body2" color="textSecondary" style={{ fontWeight: 500, lineHeight: 1.40, padding: '10px 0 0 0' }}>
-            Gray Whales have the longest migration of any mammal, from the Arctic to Mexico and back again. You don't want to miss seeing these graceful giants!
+          <Typography align="justify" variant="body2" color="textSecondary"
+            style={{ fontWeight: 500, lineHeight: 1.40, padding: '10px 0 0 0' }}
+          >
+            Gray Whales have the longest migration of any mammal,
+            from the Arctic to Mexico and back again.
+            You don't want to miss seeing these graceful giants!
           </Typography>
         </Box>
       </Box>
     </>
-  )
-}
+  );
+};
+
+export default Card;

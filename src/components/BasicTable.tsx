@@ -12,10 +12,12 @@ interface Props {
   data: Record<string, number>
 }
 
-export default function BasicTable(props: Props) {
+export const BasicTable: (props: Props) => JSX.Element = (
+  props: Props,
+) => {
   // const classes = useStyles();
 
-  const { data } = props
+  const { data } = props;
 
   const colors = ['#535353', '#90949C', '#1C3322', '#98B9DF', '#335D9F'];
   const getColor = () => colors[Math.floor(Math.random() * colors.length)];
@@ -39,4 +41,6 @@ export default function BasicTable(props: Props) {
       </Table>
     </TableContainer>
   );
-}
+};
+
+export default BasicTable;

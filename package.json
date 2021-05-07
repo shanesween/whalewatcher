@@ -1,6 +1,7 @@
 {
   "name": "whalewatcher",
   "version": "1.0.0",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "ssh://git@github.com/shanesween/whalewatcher.git",
@@ -37,10 +38,13 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start && nodemon --watch 'src/**/*.ts' --exec 'ts-node' server/index.ts",
-    "build": "react-scripts build && tsc --project ./api",
+    "start:client": "react-scripts start",
+    "start:api": "nodemon --watch 'api/**/*.ts' --exec 'ts-node' api/server/index.ts",
+    "build": "react-scripts build",
+    "build:api": "tsc --project ./",
     "fetch": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
-    "lint": "eslint . --ext .ts",
+    "lint": "eslint . --ext .ts,.tsx",
+    "lint:fix": "eslint --fix --ext .ts,.tsx .",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

@@ -29,9 +29,12 @@
         "plugin:@typescript-eslint/recommended-requiring-type-checking"
     ],
     "rules": {
-        "no-unused-expressions": "off",
+        "no-unused-vars": "off",
+        "no-unused-expressions": [
+            "off"
+        ],
         "@typescript-eslint/no-unused-expressions": [
-            "error"
+            "off"
         ],
         "no-restricted-syntax": [
             "error",
@@ -91,6 +94,9 @@
                     ".tsx"
                 ]
             }
+        ],
+        "comma-dangle": [
+            "off"
         ]
     },
     "settings": {

@@ -6,15 +6,13 @@ import Footer from './Footer';
 import Header from './Header';
 import ButtonContainer from './Button';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      height: '100vh'
-    },
-  }),
-);
+const useStyles = makeStyles((theme: Theme) => createStyles({
+  root: {
+    height: '100vh',
+  },
+}));
 
-const AppContainer = () => {
+const AppContainer: () => JSX.Element = () => {
   const classes = useStyles();
 
   return (
@@ -29,6 +27,6 @@ const AppContainer = () => {
       <Footer />
     </Box>
   );
-}
+};
 
 export default AppContainer;

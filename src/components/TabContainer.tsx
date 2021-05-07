@@ -12,21 +12,20 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function a11yProps(index: any) {
+function a11yProps(index: number) {
   return {
     id: `simple-tab-${index}`,
     'aria-controls': `simple-tabpanel-${index}`,
   };
 }
 
-const TabContainer = () => {
+const TabContainer: () => JSX.Element = () => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
-  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+  const handleChange = (event: React.ChangeEvent<Record<string, unknown>>, newValue: number) => {
     setValue(newValue);
   };
-
 
   return (
     <div className={classes.root}>
@@ -40,6 +39,6 @@ const TabContainer = () => {
       <TabPanel value={value} index={2} />
     </div>
   );
-}
+};
 
-export default TabContainer
+export default TabContainer;

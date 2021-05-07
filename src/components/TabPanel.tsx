@@ -1,24 +1,26 @@
-import React from "react";
-import { Box } from "@material-ui/core";
-import { useSelector } from "react-redux";
-import { setData } from "../helpers";
-import { Skeleton } from "@material-ui/lab";
-import BasicTable from "./BasicTable";
+import React from 'react';
+import { Box } from '@material-ui/core';
+import { useSelector } from 'react-redux';
+import { Skeleton } from '@material-ui/lab';
+import { setData } from '../helpers';
+import BasicTable from './BasicTable';
 
 interface TabPanelProps {
-    children?: React.ReactNode;
-    index: any;
-    value: any;
+  children?: React.ReactNode;
+  index: number;
+  value: number;
 }
 
-export const TabPanelComponent = (props: TabPanelProps) => {
-    const { children, value, index, ...other } = props;
-    const sightings: ISighting[] = useSelector((state: SightingState) => state.sightings)
+export const TabPanelComponent: (props: TabPanelProps) => JSX.Element = (
+  props: TabPanelProps,
+) => {
+  const { children, value, index, ...other } = props;
+  const sightings: ISighting[] = useSelector((state: SightingState) => state.sightings);
 
-    const data = setData(value, sightings)
+  const data = setData(value, sightings);
 
-    return (
-        (
+  return (
+    (
             <div
                 role="tabpanel"
                 hidden={value !== index}
@@ -44,6 +46,6 @@ export const TabPanelComponent = (props: TabPanelProps) => {
                     </Box>
                 )}
             </div>
-        ))
-}
-export default TabPanelComponent
+    ));
+};
+export default TabPanelComponent;

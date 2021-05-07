@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import cheerio from 'cheerio';
 import { Mammal, DailyData } from '../types/index';
 
@@ -7,25 +7,24 @@ const url = 'https://newportwhales.com/whalecount.html';
 const AxiosInstance = axios.create();
 
 export const getData: () => Promise<DailyData[] | undefined> = async () => {
-  try {
-    const result = await AxiosInstance.get(url);
+  const result: AxiosResponse<string> = await AxiosInstance.get(url);
 
-    const html = result.data;
+  const html: string = result.data;
 
-    // normalize whitespace gave me most problems, simple fix! read. the. docs.
-    const $ = cheerio.load(
-      html,
-      { xmlMode: true, normalizeWhitespace: true, decodeEntities: true },
-    );
+  // normalize whitespace gave me most problems, simple fix! read. the. docs.
+  const $ = cheerio.load(
+    html,
+    { xmlMode: true, normalizeWhitespace: true, decodeEntities: true },
+  );
 
-    let tableArray: string[] = $('h1:contains("Recent Counts") ~ table')?.html()?.split('</tr>') ?? [];
-    if (url.includes('2015')) {
-      tableArray = $('h1:contains("2015 Counts") ~ table')?.html()?.split('</tr>') ?? [];
-    }
+  let tableArray: string[] = $('h1:contains("Recent Counts") ~ table')?.html()?.split('</tr>') ?? [];
+  if (url.includes('2015')) {
+    tableArray = $('h1:contains("2015 Counts") ~ table')?.html()?.split('</tr>') ?? [];
+  }
 
-    const responseDataArray: DailyData[] = [];
-
-    tableArray && tableArray.forEach((row) => {
+  const responseDataArray: DailyData[] = [];
+  if (tableArray) {
+    tableArray.forEach((row) => {
       // daily <tr>
       if (row) {
         const rowArray: string[] = row.split('</td> <td>');
@@ -46,17 +45,21 @@ export const getData: () => Promise<DailyData[] | undefined> = async () => {
             dailyTotalCount += countSpecies;
 
             // species name
-            // have to check for > 2 because some data is incorrectly inputted on site (missing space after a comma)
-            if (mammal.length > 2) {
-              const species = mammal.replace(/^[, ]+|[, ]+$|[, ]+/g, ' ')?.match(/\D/g)!.join('').trim();
-              const modifiedSpecies = species.replace('&apos;', '\'');
+            // have to check for > 2 because some data is incorrectly inputted on site
+            // (missing space after a comma)
+            if (mammal && mammal.length > 2) {
+              const revisedMammal = mammal?.replace(/^[, ]+|[, ]+$|[, ]+/g, ' ').match(/\D/g);
+              if (revisedMammal) {
+                const species = revisedMammal.join('').trim();
+                const modifiedSpecies = species.replace('&apos;', '\'');
 
-              // mammalObject
-              const mammalObject: Mammal = {
-                name: modifiedSpecies, count: Number.isNaN(countSpecies) ? 0 : countSpecies,
-              };
+                // mammalObject
+                const mammalObject: Mammal = {
+                  name: modifiedSpecies, count: Number.isNaN(countSpecies) ? 0 : countSpecies,
+                };
 
-              dailyData.mammals = [...dailyData.mammals, mammalObject];
+                dailyData.mammals = [...dailyData.mammals, mammalObject];
+              }
             }
           }
         });
@@ -66,11 +69,9 @@ export const getData: () => Promise<DailyData[] | undefined> = async () => {
         dailyData.date && responseDataArray.push(dailyData);
       }
     });
-
-    return responseDataArray;
-  } catch (err) {
-    console.error(err);
   }
+
+  return responseDataArray;
 };
 
 export default getData;

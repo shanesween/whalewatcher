@@ -18,5 +18,4 @@ const bootApp = async () => {
   await loadData();
   createApp();
 };
-
-bootApp();
+bootApp().then(() => { }, () => { });

@@ -2,9 +2,8 @@
   "compilerOptions": {
     "target": "es6",
     "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
+      "es6",
+      "dom"
     ],
     "allowJs": true,
     "skipLibCheck": true,
@@ -22,9 +21,14 @@
     "noImplicitAny": true,
     "noImplicitThis": true,
     "strictNullChecks": true,
-    "rootDir": "src1"
+    "rootDir": "./",
+    "outDir": "./build",
+    "sourceMap": true
   },
   "include": [
     "."
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }

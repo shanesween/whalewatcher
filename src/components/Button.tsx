@@ -2,19 +2,17 @@ import React from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      padding: '20px 0 40px 0'
-    },
-    button: {
-      borderRadius: 20,
-      width: 300
-    }
-  }),
-);
+const useStyles = makeStyles((theme: Theme) => createStyles({
+  root: {
+    padding: '20px 0 40px 0',
+  },
+  button: {
+    borderRadius: 20,
+    width: 300,
+  },
+}));
 
-const ButtonContainer = () => {
+const ButtonContainer: () => JSX.Element = () => {
   const classes = useStyles();
 
   return (
@@ -24,6 +22,6 @@ const ButtonContainer = () => {
       </Button>
     </div>
   );
-}
+};
 
-export default ButtonContainer
+export default ButtonContainer;
